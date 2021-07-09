@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/bootstrap.min.css">
+    {{fontawesome_html()}}
+    <link rel="stylesheet" href="../static/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <center>
+                <h1>Flask Todo</h1>
+                <p>complete tasks:{{complete_tasks}}</p>
+            </center>
+            <div class="form">
+                <form action="/add" method="post">
+                    <input type="text" placeholder="Enter Todo Item" class="form-control" name="task" required />
+                    <br>
+                    <input type="submit" value="Add +" class="btn btn-primary">
+                </form>
+            </div>
+        </header>
+        <div class="tasks list-group">
+            
+            {% for task in tasks %}
+            <div class="list-group-item">
+                <div class="section">
+                    <h4>{{task.name}}</h4>
+                </div>
+                <div class="section">
+                    <a href="/delete/{{task.id}}/" class="btn btn-danger"><i class="fa fa-2x fa-trash" aria-hidden="true"></i></a>
+                </div>
+                <div class="section">
+                    
+                    {% if task.complete %}
+                        <a href="#" class="btn btn-success"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a>
+                    {% else %}
+                    <a href="/complete/{{task.id}}/" class="btn btn-warning"><i class="fa fa-check-circle fa-2x" aria-hidden="true"></i></a>
+                    {% endif %}
+                        
+                </div>
+            </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+    <link rel="stylesheet" href="../static/index.js">
+</body>
+
+</html>
